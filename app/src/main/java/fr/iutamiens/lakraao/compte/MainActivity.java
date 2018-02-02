@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button bt_toogle;
     private EditText edit_input;
     private TextView txt_time;
-    private Task task;
+    private Task task = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +30,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v){
         Log.d("tag", "click");
-        task = new Task(this, txt_time, Integer.parseInt(edit_input.getText().toString()));
-        task.execute();
+        if(task == null){
+            task = new Task(this, txt_time, Integer.parseInt(edit_input.getText().toString()));
+            task.execute();
+            bt_toogle.setText("Stop");
+        }else{
+            task.cancel(true);
+            task = null;
+            bt_toogle.setText("Start");
+        }
+
     }
 
 
