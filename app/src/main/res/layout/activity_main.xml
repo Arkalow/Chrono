@@ -28,9 +28,9 @@
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="360dp"
         android:text="Time"
-        app:layout_constraintTop_toBottomOf="@+id/input_time"
-        tools:layout_editor_absoluteX="88dp" />
+        app:layout_constraintEnd_toEndOf="@+id/input_time"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

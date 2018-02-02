@@ -8,11 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button bt_toogle;
     private EditText edit_input;
     private TextView txt_time;
+    private Task task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +24,15 @@ public class MainActivity extends AppCompatActivity {
         edit_input = findViewById(R.id.input_time);
         txt_time = findViewById(R.id.time);
 
-        bt_toogle.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Log.d("click", "ok");
-            }
-        });
-
+        bt_toogle.setOnClickListener(this);
+        Log.d("tag", "onCreate");
     }
+    @Override
+    public void onClick(View v){
+        Log.d("tag", "click");
+        task = new Task(this, txt_time, Integer.parseInt(edit_input.getText().toString()));
+        task.execute();
+    }
+
+
 }
