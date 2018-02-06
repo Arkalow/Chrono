@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Accesseur de la textView txt_time
      * @return la valeur de txt_time
      */
-    private Integer txt_time(Integer value){
-        txt_time.setText(value);
+    public Integer txt_time(Integer value){
+        txt_time.setText(value.toString());
         return value;
     }
 

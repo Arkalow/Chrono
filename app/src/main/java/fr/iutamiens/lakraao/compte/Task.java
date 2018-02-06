@@ -12,8 +12,6 @@ public class Task extends AsyncTask <Object ,Integer, String>{
 
     private final MainActivity context;
 
-    private final TextView textView;
-
     private final Integer input;
 
     /*
@@ -22,7 +20,6 @@ public class Task extends AsyncTask <Object ,Integer, String>{
     public Task(MainActivity context, TextView text, Integer input){
         Log.d("Task", "Task: constructeur");
         this.context = context;
-        this.textView = text;
         this.input = input;
     }
 
@@ -32,7 +29,7 @@ public class Task extends AsyncTask <Object ,Integer, String>{
         try {
         while(compteur > 0){
             Thread.sleep(1000);
-            compteur --;
+            compteur--;
             Log.d("Task", "Task: increment");
             publishProgress(compteur);
         }
@@ -58,9 +55,10 @@ public class Task extends AsyncTask <Object ,Integer, String>{
 
     @Override
     protected void onProgressUpdate(Integer... values) {
-        Log.d("Task", "Task: Progress");
-        textView.setText(values[0] + "");
         super.onProgressUpdate(values);
+        Log.d("Task", "Task: Progress");
+        Integer tmp = values[0];
+        context.txt_time(tmp);
     }
 
     @Override
