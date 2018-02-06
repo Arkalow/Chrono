@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -32,21 +33,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("tag", "click");
         if(task == null){
             start(Integer.parseInt(edit_input.getText().toString()));
-            bt_toogle.setText("Stop");
+            Toast.makeText(this, "Démarage", Toast.LENGTH_LONG).show();
         }else{
             task.cancel(true);
+            Toast.makeText(this, "Fin", Toast.LENGTH_LONG).show();
             task = null;
-            bt_toogle.setText("Start");
         }
 
     }
     private void start(int val){
         task = new Task(this, txt_time, val);
         task.execute();
+        bt_toogle.setText("Stop");
     }
-    private void stop(){
+    public void stop(){
         task.cancel(true);
         task = null;
+        bt_toogle.setText("Start");
     }
 
     @Override
@@ -55,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("statut", "save");
         outState.putInt("val", Integer.parseInt(txt_time.getText().toString()));
         stop();
-
     }
 
     @Override

@@ -47,15 +47,11 @@ public class Task extends AsyncTask <Object ,Integer, String>{
 
     @Override
     protected void onPreExecute() {
-        textView.setText(input.toString());
-        Toast.makeText(context, "Démarage", Toast.LENGTH_LONG).show();
         super.onPreExecute();
     }
 
     @Override
     protected void onPostExecute(String str) {
-        textView.setText(input.toString());
-        Toast.makeText(context, "Fin", Toast.LENGTH_LONG).show();
         super.onPostExecute(str);
     }
 
@@ -68,7 +64,7 @@ public class Task extends AsyncTask <Object ,Integer, String>{
 
     @Override
     protected void onCancelled() {
-        Log.d("Task", "Task: Cancelled");
         super.onCancelled();
+        Log.d("Task", "Task: Cancelled");
     }
 }
