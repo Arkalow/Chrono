@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.security.spec.ECParameterSpec;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button bt_toogle;
@@ -91,9 +93,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onSaveInstanceState (Bundle outState){
         super.onSaveInstanceState(outState);
-        Log.d("statut", "save");
-        outState.putInt("val", txt_time());
-        stop();
+        if(task != null){
+            Log.d("statut", "save");
+            outState.putInt("val", txt_time());
+            stop();
+        }
     }
 
     /**
@@ -102,8 +106,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     @Override
     public void onRestoreInstanceState (Bundle savedInstanceState){
-        Log.d("statut", "restore");
-        start(Integer.parseInt(savedInstanceState.get("val").toString()));
+        try{
+            Log.d("statut", "restore");
+            start(Integer.parseInt(savedInstanceState.get("val").toString()));
+        }catch(Exception e){
+
+        }
+
     }
 
 
