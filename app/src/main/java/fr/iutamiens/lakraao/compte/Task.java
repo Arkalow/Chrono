@@ -2,6 +2,7 @@ package fr.iutamiens.lakraao.compte;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,7 +13,7 @@ import android.widget.Toast;
 
 public class Task extends AsyncTask <Object ,Integer, String>{
 
-    private final Context context;
+    private final MainActivity context;
 
     private final TextView textView;
 
@@ -21,7 +22,7 @@ public class Task extends AsyncTask <Object ,Integer, String>{
     /*
     Constructeur
      */
-    public Task(Context context, TextView text, Integer input){
+    public Task(MainActivity context, TextView text, Integer input){
         Log.d("Task", "Task: constructeur");
         this.context = context;
         this.textView = text;
@@ -48,11 +49,14 @@ public class Task extends AsyncTask <Object ,Integer, String>{
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        Log.d("Task", "onPreExecute");
     }
 
     @Override
     protected void onPostExecute(String str) {
         super.onPostExecute(str);
+        Log.d("Task", "onPostExecute");
+        context.stop();
     }
 
     @Override
@@ -64,7 +68,7 @@ public class Task extends AsyncTask <Object ,Integer, String>{
 
     @Override
     protected void onCancelled() {
-        super.onCancelled();
         Log.d("Task", "Task: Cancelled");
+        super.onCancelled();
     }
 }

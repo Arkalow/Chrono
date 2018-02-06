@@ -28,6 +28,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bt_toogle.setOnClickListener(this);
         Log.d("tag", "onCreate");
     }
+
+    /*
+    Interaction avec l'utilisateur
+     */
     @Override
     public void onClick(View v){
         Log.d("tag", "click");
@@ -39,19 +43,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "Fin", Toast.LENGTH_LONG).show();
             task = null;
         }
-
     }
-    private void start(int val){
+
+    /*
+    Lancement du chrono
+     */
+    public void start(int val){
         task = new Task(this, txt_time, val);
         task.execute();
         bt_toogle.setText("Stop");
     }
     public void stop(){
+        bt_toogle.setText("Start");
+        Log.d("statut", "stop");
         task.cancel(true);
         task = null;
-        bt_toogle.setText("Start");
     }
 
+
+
+
+
+
+
+    /*
+    Réorientation de l'écran
+     */
     @Override
     public void onSaveInstanceState (Bundle outState){
         super.onSaveInstanceState(outState);
