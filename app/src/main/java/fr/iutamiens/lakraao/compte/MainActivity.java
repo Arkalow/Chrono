@@ -31,8 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v){
         Log.d("tag", "click");
         if(task == null){
-            task = new Task(this, txt_time, Integer.parseInt(edit_input.getText().toString()));
-            task.execute();
+            start(Integer.parseInt(edit_input.getText().toString()));
             bt_toogle.setText("Stop");
         }else{
             task.cancel(true);
@@ -41,6 +40,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+    private void start(int val){
+        task = new Task(this, txt_time, val);
+        task.execute();
+    }
+    private void stop(){
+        task.cancel(true);
+        task = null;
+    }
+
+    @Override
+    public void onSaveInstanceState (Bundle outState){
+        super.onSaveInstanceState(outState);
+        Log.d("statut", "save");
+        outState.putShort("val", Short.parseShort(txt_time.getText().toString()));
+        stop();
+
+    }
+
+    @Override
+    public void onRestoreInstanceState (Bundle savedInstanceState){
+        Log.d("statut", "restore");
+        start(Integer.parseInt(savedInstanceState.get("val").toString()));
+    }
+
 
 
 }
