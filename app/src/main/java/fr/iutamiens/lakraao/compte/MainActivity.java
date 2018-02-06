@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onSaveInstanceState (Bundle outState){
         super.onSaveInstanceState(outState);
         Log.d("statut", "save");
-        outState.putShort("val", Short.parseShort(txt_time.getText().toString()));
+        outState.putInt("val", Integer.parseInt(txt_time.getText().toString()));
         stop();
 
     }
