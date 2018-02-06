@@ -1,11 +1,8 @@
 package fr.iutamiens.lakraao.compte;
 
-import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by omer on 02/02/18.

@@ -28,9 +28,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bt_toogle.setOnClickListener(this);
         Log.d("tag", "onCreate");
     }
-
-    /*
-    Interaction avec l'utilisateur
+    
+    /**
+     * Interaction avec l'utilisateur
+     * @param v
      */
     @Override
     public void onClick(View v){
@@ -45,14 +46,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    /*
-    Lancement du chrono
+    /**
+     * Lancement du chrono
+     * @param val
      */
     public void start(int val){
         task = new Task(this, txt_time, val);
         task.execute();
         bt_toogle.setText("Stop");
     }
+
+    /**
+     * Arrêt du chrono
+     */
     public void stop(){
         bt_toogle.setText("Start");
         Log.d("statut", "stop");
@@ -60,23 +66,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         task = null;
     }
 
+    /**
+     * Accesseur de la textView txt_time
+     * @return la valeur de txt_time
+     */
+    private Integer txt_time(){
+        return Integer.parseInt(txt_time.getText().toString());
+    }
+
+    /**
+     * Accesseur de la textView txt_time
+     * @return la valeur de txt_time
+     */
+    private Integer txt_time(Integer value){
+        txt_time.setText(value);
+        return value;
+    }
 
 
-
-
-
-
-    /*
-    Réorientation de l'écran
+    /**
+     * Sauvegarde
+     * @param outState
      */
     @Override
     public void onSaveInstanceState (Bundle outState){
         super.onSaveInstanceState(outState);
         Log.d("statut", "save");
-        outState.putInt("val", Integer.parseInt(txt_time.getText().toString()));
+        outState.putInt("val", txt_time());
         stop();
     }
 
+    /**
+     * Restauration
+     * @param savedInstanceState
+     */
     @Override
     public void onRestoreInstanceState (Bundle savedInstanceState){
         Log.d("statut", "restore");
