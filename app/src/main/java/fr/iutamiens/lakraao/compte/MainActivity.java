@@ -9,7 +9,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.security.spec.ECParameterSpec;
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         bt_toogle.setOnClickListener(this);
         Log.d("tag", "onCreate");
+
     }
     
     /**
@@ -40,11 +43,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("tag", "click");
         if(task == null){
             start(Integer.parseInt(edit_input.getText().toString()));
-            Toast.makeText(this, "Démarage", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Start", Toast.LENGTH_LONG).show();
         }else{
-            task.cancel(true);
-            Toast.makeText(this, "Fin", Toast.LENGTH_LONG).show();
-            task = null;
+            stop();
+            Toast.makeText(this, "Stop", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -110,11 +112,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.d("statut", "restore");
             start(Integer.parseInt(savedInstanceState.get("val").toString()));
         }catch(Exception e){
-
+            Log.e("restoreInstance", "Impossible de recréer une instance qui n'existe pas");
         }
 
     }
 
+    /**
+     * Retourne la date actuelle en seconde
+     * @return
+     */
+    public Integer dateNow(){
+        Date currentTime = Calendar.getInstance().getTime();
+        String str = currentTime.getTime()+"";
+        return Integer.parseInt(str);
+    }
 
 
 }
