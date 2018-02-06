@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText edit_input;
     private TextView txt_time;
     private Task task = null;
+    private long dateEnd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v){
         Log.d("tag", "click");
         if(task == null){
-            start(Integer.parseInt(edit_input.getText().toString()));
+            dateEnd = dateNow() + edit_input();
+            start(dateEnd);
             Toast.makeText(this, "Start", Toast.LENGTH_LONG).show();
         }else{
             stop();
@@ -54,8 +57,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Lancement du chrono
      * @param val
      */
-    public void start(int val){
-        task = new Task(this, txt_time, val);
+    public void start(long val){
+
+        Log.d("date", dateNow() + "");
+        Log.d("date", dateNow() + "");
+        Log.d("date", dateNow() + "");
+        Log.d("date", dateNow() + "");
+        Log.d("date", dateNow() + "");
+        Log.d("date", "val : " + val + "| dateNow : " + dateNow());
+        task = new Task(this, (int)(val - dateNow()));
         task.execute();
         bt_toogle.setText("Stop");
     }
@@ -86,6 +96,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txt_time.setText(value.toString());
         return value;
     }
+
+    /**
+     * Accesseur de l'input
+     * @return
+     */
+    private long edit_input(){return Long.parseLong(edit_input.getText().toString()); }
 
 
     /**
@@ -121,10 +137,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * Retourne la date actuelle en seconde
      * @return
      */
-    public Integer dateNow(){
+    public long dateNow(){
         Date currentTime = Calendar.getInstance().getTime();
         String str = currentTime.getTime()+"";
-        return Integer.parseInt(str);
+        return Long.parseLong(str);
     }
 
 

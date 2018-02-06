@@ -2,7 +2,6 @@ package fr.iutamiens.lakraao.compte;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.TextView;
 
 /**
  * Created by omer on 02/02/18.
@@ -17,7 +16,7 @@ public class Task extends AsyncTask <Object ,Integer, String>{
     /*
     Constructeur
      */
-    public Task(MainActivity context, TextView text, Integer input){
+    public Task(MainActivity context, Integer input){
         Log.d("Task", "Task: constructeur");
         this.context = context;
         this.input = input;
